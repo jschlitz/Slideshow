@@ -35,7 +35,6 @@ function doSlides(id, baseOffset, files){
     .animate(p2, STEADY, 'linear')
     .animate(p3, FADE, 'linear', function() {
       doSlides(id, baseOffset, files); //let's see if this blows the stack.
-//      setTimeout(function(){doSlides(id, baseOffset, files);}, 1); 
     });
 
 }
