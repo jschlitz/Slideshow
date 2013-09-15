@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 //var IMAGES is defined in another file.
 var SHIFT, FADE, STEADY;
 SHIFT = 10;
@@ -11,12 +11,6 @@ $(document).ready(function(){
   doSlides('#leftImage', 0, IMAGES);
   setTimeout(function(){doSlides('#rightImage', 50, IMAGES);}, STEADY);
 });
-
-///deprecated. probably.
-function gotFiles (raw){
-  var files;
-  files = raw.split('\n').filter(function(x){return x!==''});
-};
 
 ///Do the slideshow for the img element, perpetually.
 /// id - css id to use
@@ -43,15 +37,15 @@ function doSlides(id, baseOffset, files){
       doSlides(id, baseOffset, files); //let's see if this blows the stack.
 //      setTimeout(function(){doSlides(id, baseOffset, files);}, 1); 
     });
-  ;
-};
+
+}
 
 ///random number from [0-max)
 function randomInt(max){
   return Math.floor(Math.random()*max);
-};
+}
 
 ///Get a random item from an array. yeah, you can break it with []
 function randomItem(arr){
   return arr[randomInt(arr.length)];
-};
+}
