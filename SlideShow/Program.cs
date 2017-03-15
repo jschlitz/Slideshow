@@ -12,11 +12,11 @@ namespace SlideShow
   {
     static void Main(string[] args)
     {
-      var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-      var items = Directory.GetFiles(dir, "*.jpg").ToList();
-      items.AddRange(Directory.GetFiles(dir, "*.jpeg"));
-      items.AddRange(Directory.GetFiles(dir, "*.gif"));
-      items.AddRange(Directory.GetFiles(dir, "*.png"));
+      var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar;
+      var items = Directory.GetFiles(dir, "*.jpg", SearchOption.AllDirectories).ToList();
+      items.AddRange(Directory.GetFiles(dir, "*.jpeg", SearchOption.AllDirectories));
+      items.AddRange(Directory.GetFiles(dir, "*.gif", SearchOption.AllDirectories));
+      items.AddRange(Directory.GetFiles(dir, "*.png", SearchOption.AllDirectories));
 
       //rename all the filesthat are samples
       const string SAM = "sample-";
@@ -33,7 +33,7 @@ namespace SlideShow
       {
         sw.WriteLine("var IMAGES = [");
         foreach (var item in items)
-          sw.WriteLine("  \"{0}\",", Path.GetFileName(item)); //seems we don't have to worry about the extra comma
+          sw.WriteLine("  \"{0}\",", item.Substring(dir.Length).Replace(@"\", @"\\")); //seems we don't have to worry about the extra comma
         sw.WriteLine("];");
       }
     }
