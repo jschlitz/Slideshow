@@ -20,10 +20,12 @@ namespace SlideShow
 
       //rename all the filesthat are samples
       const string SAM = "sample-";
-      foreach (var item in items.Select(x => Path.GetFileName(x)).Where(x => x.StartsWith(SAM, StringComparison.CurrentCultureIgnoreCase)))
+      foreach (var item in items.Where(x => Path.GetFileName(x).StartsWith(SAM, StringComparison.CurrentCultureIgnoreCase)))
       {
-        var newName = Path.Combine(dir, item.Substring(SAM.Length, item.Length-SAM.Length));
-        var oldName = Path.Combine(dir, item);
+        var fp = Path.GetFileName(item);
+        var d = Path.GetDirectoryName(item);
+        var newName = Path.Combine(d, fp.Substring(SAM.Length, fp.Length-SAM.Length));
+        var oldName = item;
         if (!items.Contains(newName))
           File.Copy(oldName, newName);
         File.Delete(oldName);
